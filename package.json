@@ -1,0 +1,17 @@
+{
+  "name": "excel-fill-remover",
+  "version": "1.0.0",
+  "description": "Removes fill color from excel cells",
+  "main": "index.js",
+  "bin": "index.js",
+  "dependencies": {
+    "exceljs": "^4.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "build": "pkg . --targets windows"
+  },
+  "author": "wildflowericecoffee",
+  "license": "ISC"
+}
