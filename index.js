@@ -8,17 +8,21 @@ async function processWorkbook(filePath) {
     const workbook = new Excel.Workbook();
     await workbook.xlsx.readFile(`./${filePath}.xlsx`);
 
-    const worksheet = workbook.worksheets[0];
-
-    worksheet.eachRow((row) => {
-        row.eachCell((cell) => {
-            if (cell.fill.pattern == "solid") {
-                cell.fill = {
-                    type: "pattern",
-                    pattern: "none"
-                };
-            }
+    workbook.eachSheet((sheet) => {
+        sheet.eachRow((row) => {
+            row.eachCell((cell) => {
+                if (cell.fill.pattern == "solid") {
+                    cell.fill = {
+                        type: "pattern",
+                        pattern: "none"
+                    };
+                }
+            });
         });
+
+        sheet.pageSetup.fitToPage = true;
+        sheet.pageSetup.fitToWidth = 1;
+        sheet.pageSetup.fitToHeight = 0;
     });
 
     await workbook.xlsx.writeFile(`./${filePath}Processed.xlsx`);
