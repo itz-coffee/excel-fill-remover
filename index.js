@@ -6,7 +6,7 @@ const readline = require('readline').createInterface({
 
 async function processWorkbook(filePath) {
     const workbook = new Excel.Workbook();
-    await workbook.xlsx.readFile(`./${filePath}.xlsx`);
+    await workbook.xlsx.readFile(filePath);
 
     workbook.eachSheet((sheet) => {
         sheet.eachRow((row) => {
@@ -25,11 +25,11 @@ async function processWorkbook(filePath) {
         sheet.pageSetup.fitToHeight = 0;
     });
 
-    await workbook.xlsx.writeFile(`./${filePath}Processed.xlsx`);
+    await workbook.xlsx.writeFile(`${filePath}Processed.xlsx`);
     console.log(`${filePath} was processed!`);
 }
 
-readline.question("Workbook name: ", filePath => {
+readline.question("Drag and drop workbook and press [ENTER]: ", filePath => {
     processWorkbook(filePath);
     readline.close();
 });
